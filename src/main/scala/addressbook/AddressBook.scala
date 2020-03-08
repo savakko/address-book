@@ -13,9 +13,11 @@ import scalatags.JsDom.all._
 object AddressBook {
 
   /** These are example contacts */
-  Book.createContact("Sauli Kokkonen", "0400380216", "sauli.kokkonen@aalto.fi")
-  Book.createContact("Teemu Teekkari", "12345", "teemu@teekkari.fi")
-  Book.createContact("Johanna Tukiainen", "54321", "tukiainen@suomi24.fi")
+  for (i <- 0 to 5) {
+    Book.createContact("Sauli Kokkonen", "0400380216", "sauli.kokkonen@aalto.fi")
+    Book.createContact("Teemu Teekkari", "12345", "teemu@teekkari.fi")
+    Book.createContact("Johanna Tukiainen", "54321", "tukiainen@suomi24.fi")
+  }
 
   val addName   = input("Name").render
   val addNumber = input("Number").render
@@ -46,7 +48,6 @@ object AddressBook {
 
   def rebuildUI(target: html.Div, addName: Input, addNumber: Input, addEmail: Input, addButton: Button): Div =
     div(
-      h1("Simple Address Book"),
       table(
         tr( th("Name"), th("Number"), th("Email"), th("") ),
         for (c <- Book.contacts) yield

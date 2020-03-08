@@ -11,6 +11,12 @@
 	  padding-left: 10%;
 	  <!--background-color: lightblue;-->
 	}
+	.info {
+	  position: fixed;
+	  bottom: 5%;
+	  width: 100%;
+	  text-align: center;
+	}
 	table {
 	  width: 45%;
 	  <!--border: 1px solid black;-->
@@ -20,11 +26,28 @@
 	  width: 30%;
 	  <!--border: 1px solid black;-->
 	}
+	input {
+	  width: 13%;
+	  margin-top: 10px;
+	  margin-bottom: 5px;
+	}
   </style>
 </head>
 <body>
 
-<div class="background" id="playground">
+<div class="background" id="playground"></div>
+<div class="info">
+  Info:
+  <br>
+  'Add a new contact' -button attempts to insert a new contact into
+  the list with the info from the respective input fields.
+  However, if all input fields are empty, the attempt will fail.
+  <br>
+  'Edit' -button attempts to modify the corresponding contact according
+  to the info within the input fields. If the input fields are empty,
+  this attempt will fail.
+  <br>
+  'X' -button will delete the corresponding contact.
 </div>
 
 <script type="text/javascript" src="./target/scala-2.11/address-book-fastopt.js"></script>

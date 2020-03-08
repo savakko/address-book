@@ -17,9 +17,9 @@ object AddressBook {
   Book.createContact("Teemu Teekkari", "12345", "teemu@teekkari.fi")
   Book.createContact("Johanna Tukiainen", "54321", "tukiainen@suomi24.fi")
 
-  val addName   = input("Nimi").render
-  val addNumber = input("Numero").render
-  val addEmail  = input("Sähköposti").render
+  val addName   = input("Name").render
+  val addNumber = input("Number").render
+  val addEmail  = input("Email").render
   val addButton = button("Add a new contact").render
 
   @JSExport
@@ -70,8 +70,11 @@ object AddressBook {
   def createDeleteButton(target: Div, contact: Contact) = {
     val b = button("X").render
     b.onclick = (_: MouseEvent) => {
-      Book.deleteContact(contact)
-      refreshScreen(target)
+      val verified = dom.window.confirm(s"You are about to delete:\n${contact}")
+      if (verified) {
+        Book.deleteContact(contact)
+        refreshScreen(target)
+      }
     }
     b
   }

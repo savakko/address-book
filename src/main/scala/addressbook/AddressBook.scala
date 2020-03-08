@@ -48,7 +48,7 @@ object AddressBook {
     div(
       h1("Simple Address Book"),
       table(
-        tr( th("Nimi"), th("Numero"), th("Sähköposti"), th("") ),
+        tr( th("Name"), th("Number"), th("Email"), th("") ),
         for (c <- Book.contacts) yield
           tr( td(c.name), td(c.phone), td(c.email), createEditButton(target, c), createDeleteButton(target, c) )
       ),

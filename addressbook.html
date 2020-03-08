@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Address Book demo</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  
+  <!-- Make things look pretty here -->
+  <style>
+    .background {
+	  padding-top: 5%;
+	  padding-left: 10%;
+	  <!--background-color: lightblue;-->
+	}
+	table {
+	  width: 45%;
+	  <!--border: 1px solid black;-->
+	  cellspacing: 10;
+	}
+	td {
+	  width: 30%;
+	  <!--border: 1px solid black;-->
+	}
+  </style>
+</head>
+<body>
+
+<div class="background" id="playground">
+</div>
+
+<script type="text/javascript" src="./target/scala-2.11/address-book-fastopt.js"></script>
+<script>
+  addressbook.AddressBook().main(document.getElementById('playground'));
+</script>
+
+</body>
+</html>

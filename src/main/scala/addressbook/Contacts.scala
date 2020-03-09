@@ -1,21 +1,31 @@
 package addressbook
 
-import collection.mutable.Buffer
 
+/** 
+ *  Book is a singleton object which handles all contacts.
+ *  Contacts can be added, edited and removed.
+ */
 object Book {
+  import collection.mutable.Buffer
+
   val contacts = Buffer[Contact]()
+
 
   def listContacts: String = contacts.mkString("\n")
 
+  def createContact(c: Contact): Unit = contacts += c
   def createContact(n: String, p: String, e: String): Unit = {
     if ( !(n == "" && p == "" && e == "") )
       contacts += Contact(n.trim, p.trim, e.trim)
   }
-  def createContact(c: Contact): Unit = contacts += c
 
   def deleteContact(c: Contact): Unit = contacts -= c
+
 }
 
+/** 
+ *  See [Book]
+ */
 class Contact(var name: String, var phone: String, var email: String) {
 
   def update(n: String, p: String, e: String): Unit = {
@@ -28,6 +38,9 @@ class Contact(var name: String, var phone: String, var email: String) {
 
 }
 
+/**
+ *  This is mainly a constructor.
+ */
 object Contact {
   
   def apply(n: String, p: String, e: String) = {

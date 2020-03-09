@@ -49,7 +49,7 @@
 <body>
 
 <h1>Simple Address Book</h1>
-<div class="book" id="playground"></div>
+<div class="book" id="contacts"></div>
 <div class="inputfields" id="inputs"></div>
 <div class="info">
   Info:
@@ -67,10 +67,12 @@
 
 <script type="text/javascript" src="./target/scala-2.11/address-book-fastopt.js"></script>
 <script>
-  addressbook.AddressBook().main(document.getElementById('playground'));
-</script>
-<script>
-  addressbook.InputFields().main(document.getElementById('inputs'));
+  var contacts = document.getElementById('contacts')
+  var inputs   = document.getElementById('inputs')
+
+  addressbook.AddressBook().main(contacts);
+
+  addressbook.InputFields().main(inputs, contacts);
 </script>
 
 </body>

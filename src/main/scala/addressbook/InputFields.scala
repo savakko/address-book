@@ -1,7 +1,5 @@
 package addressbook
 
-import scala.scalajs.js.Date
-
 import org.scalajs.dom
 import dom.html
 import org.scalajs.dom.html.{Div, Button, Input}
@@ -9,16 +7,21 @@ import org.scalajs.dom.raw.MouseEvent
 import scalajs.js.annotation.JSExport
 import scalatags.JsDom.all._
 
+/** 
+ *  InputFields controls inputs by the user.
+ */
 @JSExport
 object InputFields {
 
+  /** HTML components */
   val addName   = input("Name").render
   val addNumber = input("Number").render
   val addEmail  = input("Email").render
   val addButton = button("Add a new contact").render
 
+  /** The main method is called by the script in addressbook.html */
   @JSExport
-  def main(target: html.Div): Unit = {
+  def main(target: html.Div, other: html.Div): Unit = {
 
     addButton.onclick = (x: MouseEvent) => {
       val name   = addName.value
@@ -26,21 +29,26 @@ object InputFields {
       val email  = addEmail.value
       Book.createContact(name, number, email)
 
+      AddressBook.refreshScreen(other)
       refreshScreen(target)
     }
 
     refreshScreen(target)
   }
 
-  def refreshScreen(target: Div): Unit = {
-    target.innerHTML = ""
-    target.appendChild(
-      rebuildUI(target, addName, addNumber, addEmail, addButton)
-    )
+  /** Clears the input field values. */
+  def refreshValues: Unit = {
+    addName.value   = ""
+	addNumber.value = ""
+	addEmail.value  = ""
   }
 
-  def rebuildUI(target: html.Div, addName: Input, addNumber: Input, addEmail: Input, addButton: Button): Div =
-    div(addForm).render
+  /** Redraws the components. */
+  def refreshScreen(target: Div): Unit = {
+    target.innerHTML = ""
+	this.refreshValues
+    target.appendChild( div(addForm).render )
+  }
 
   val addForm = Array(
     div(addName, addNumber, addEmail),

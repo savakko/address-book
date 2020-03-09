@@ -1,7 +1,5 @@
 package addressbook
 
-import scala.scalajs.js.Date
-
 import org.scalajs.dom
 import dom.html
 import org.scalajs.dom.html.{Div, Button, Input}
@@ -9,6 +7,10 @@ import org.scalajs.dom.raw.MouseEvent
 import scalajs.js.annotation.JSExport
 import scalatags.JsDom.all._
 
+/** 
+ *  AddressBook handles the display of all contacts.
+ *  See [Book]
+ */
 @JSExport
 object AddressBook {
 
@@ -19,10 +21,12 @@ object AddressBook {
     Book.createContact("Minna Mattila", "54321", "mattila@suomi24.fi")
   }
 
+  /** The main method is called by the script in addressbook.html */
   @JSExport
   def main(target: html.Div): Unit = 
     refreshScreen(target)
 
+  /** Redraws the components. */
   def refreshScreen(target: Div): Unit = {
     target.innerHTML = ""
     target.appendChild(
@@ -30,27 +34,32 @@ object AddressBook {
     )
   }
 
+  /** See [refreshScreen]. */
   def rebuildUI(target: html.Div): Div =
     div(
       table(
         tr( th("Name"), th("Number"), th("Email"), th("") ),
+		// One row for each contact.
         for (c <- Book.contacts) yield
           tr( td(c.name), td(c.phone), td(c.email), createEditButton(target, c), createDeleteButton(target, c) )
       )
     ).render
 
+  /** Creates a button which can be used to edit existing contacts. */
   def createEditButton(target: Div, contact: Contact) = {
     val b = button("Edit").render
     b.onclick = (_: MouseEvent) => {
       val name   = InputFields.addName.value
       val number = InputFields.addNumber.value
       val email  = InputFields.addEmail.value
+	  InputFields.refreshValues
       contact.update(name, number, email)
       refreshScreen(target)
     }
     b
   }
 
+  /** Creates a button which can be used to delete contacts. */
   def createDeleteButton(target: Div, contact: Contact) = {
     val b = button("X").render
     b.onclick = (_: MouseEvent) => {
@@ -61,19 +70,6 @@ object AddressBook {
       }
     }
     b
-  }
-
-  val addForm = {
-    val (name, num, email, button) = (
-	  InputFields.addName,
-	  InputFields.addNumber,
-	  InputFields.addEmail,
-	  InputFields.addButton
-	)
-    Array(
-      div(name, num, email),
-      div(button)
-    )
   }
 
 }

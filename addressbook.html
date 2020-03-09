@@ -6,22 +6,30 @@
   
   <!-- Make things look pretty here -->
   <style>
-    h1 {
-	  margin-top: 2%;
-	  text-align: center;
-	}
     .book {
 	  width: 50%;
 	  min-width: 675px;
 	  margin: auto;
-	  max-height: 600px;
+	  max-height: 420px;
 	  overflow: auto;
-	  <!--background-color: lightblue;-->
 	}
-	.info {
-	  position: fixed;
-	  bottom: 5%;
+	.info{
 	  width: 100%;
+	  position: fixed;
+	  bottom: 1%;
+	  text-align: center;
+	}
+	.inputfields {
+	  width: 50%;
+	  min-width: 675px;
+	  margin: auto;
+	  margin-top: 10px;
+	}
+	input {
+	  width: 28.5%;
+	}
+	h1 {
+	  margin-top: 2%;
 	  text-align: center;
 	}
 	table {
@@ -31,16 +39,18 @@
 	td {
 	  width: 30%;
 	}
-	input {
-	  width: 29.5%;
-	  margin-top: 100px;
-	}
+	@media only screen and (max-height: 660px) {
+      .info {
+        visibility: hidden;
+      }
+    }
   </style>
 </head>
 <body>
 
 <h1>Simple Address Book</h1>
 <div class="book" id="playground"></div>
+<div class="inputfields" id="inputs"></div>
 <div class="info">
   Info:
   <br>
@@ -58,6 +68,9 @@
 <script type="text/javascript" src="./target/scala-2.11/address-book-fastopt.js"></script>
 <script>
   addressbook.AddressBook().main(document.getElementById('playground'));
+</script>
+<script>
+  addressbook.InputFields().main(document.getElementById('inputs'));
 </script>
 
 </body>

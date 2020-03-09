@@ -51,6 +51,7 @@ object InputFields {
   }
 
   val addForm = Array(
+    div( table( tr( th("Name"), th("Phone"), th("Email") ) ) ),
     div(addName, addNumber, addEmail),
     div(addButton)
   )

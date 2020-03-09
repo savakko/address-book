@@ -28,11 +28,18 @@ object Book {
  */
 class Contact(var name: String, var phone: String, var email: String) {
 
+  private var open = false // Indicates whether the user is viewing this contact.
+
+  def isOpen = open
+  def toggle = {open = !open}
+
   def update(n: String, p: String, e: String): Unit = {
     this.name  = {if (n != "") n else this.name}
     this.phone = {if (p != "") p else this.phone}
     this.email = {if (e != "") e else this.email}
   }
+
+  def info: String = s"Phone number: $phone Email: $email"
 
   override def toString: String = s"$name, $phone, $email"
 
